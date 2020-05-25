@@ -7,10 +7,11 @@ import java.util.UUID;
 public class Client {
     private UUID id;
     private String name;
-    private Collection<UUID> accountIds = new ArrayList<>(); //TODO
+    private Collection<UUID> accountIds = new ArrayList<>();
 
     public Client(UUID id, String name) {
         if (id == null) throw new IllegalArgumentException();
+        if ((name == null) || name.isEmpty()) throw new IllegalArgumentException();
 
         this.id = id;
         this.name = name;

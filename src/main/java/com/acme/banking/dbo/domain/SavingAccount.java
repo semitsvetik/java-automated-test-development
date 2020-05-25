@@ -8,8 +8,8 @@ public class SavingAccount implements Account {
     private double amount;
 
     public SavingAccount(UUID id, Client client, double amount) {
-//        if (id == null) throw new IllegalArgumentException("Pre-requisite failed: id is null");
-
+        if (id == null) throw new IllegalArgumentException("Pre-requisite failed: id is null");
+        if (client == null) throw new IllegalArgumentException("Pre-requisite failed: client is null");
         this.id = id;
         this.client = client;
         this.amount = amount;
