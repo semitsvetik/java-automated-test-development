@@ -10,8 +10,13 @@ public class Client {
     private Collection<UUID> accountIds = new ArrayList<>();
 
     public Client(UUID id, String name) {
-        if (id == null) throw new IllegalArgumentException();
-        if ((name == null) || name.isEmpty()) throw new IllegalArgumentException();
+        if (id == null)
+            throw new IllegalArgumentException("Pre-requisite failed: Client id is null");
+        if (name == null)
+            throw new IllegalArgumentException("Pre-requisite failed: Client name is null");
+        else if (name.isEmpty()) {
+            throw new IllegalArgumentException("Pre-requisite failed: Client name is empty");
+        }
 
         this.id = id;
         this.name = name;

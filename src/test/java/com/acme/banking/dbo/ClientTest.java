@@ -4,6 +4,7 @@ import com.acme.banking.dbo.domain.Client;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.UUID;
 
@@ -23,6 +24,9 @@ public class ClientTest {
         System.out.println("Executed before each test");
     }
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
     @Test
     public void shouldSavePropertiesWhenCreated() {
         Client sut = new Client(stubId, dummyName);
@@ -39,18 +43,24 @@ public class ClientTest {
                 ));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldNotSavePropertiesWhenIdIsNull() {
+    @Test
+    public void shouldThrowExceptionWhenIdIsNull() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pre-requisite failed: Client id is null");
         Client sut = new Client(null, dummyName);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldNotSavePropertiesWhenNameIsNull() {
+    @Test
+    public void shouldThrowExceptionWhenNameIsNull() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pre-requisite failed: Client name is null");
         Client sut = new Client(stubId, null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldNotSavePropertiesWhenNameIsEmpty() {
+    @Test
+    public void shouldThrowExceptionWhenNameIsEmpty() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Pre-requisite failed: Client name is empty");
         Client sut = new Client(stubId, "");
     }
 }
