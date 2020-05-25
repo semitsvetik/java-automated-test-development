@@ -101,6 +101,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
+                    <groups>com.acme.banking.dbo.PositiveTests,com.acme.banking.dbo.NegativeTests</groups>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -javaagent:"${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=target/coverage-reports/jacoco-unit.exec,excludes=java/lang/*:java/util/*"

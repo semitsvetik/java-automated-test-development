@@ -4,12 +4,14 @@ import com.acme.banking.dbo.domain.Client;
 import com.acme.banking.dbo.domain.SavingAccount;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.experimental.categories.Category;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+
+interface PositiveTests { /* category marker */ }
+interface NegativeTests { /* category marker */ }
 
 public class SavingAccountTest {
     UUID dummyUuid;
@@ -21,6 +23,7 @@ public class SavingAccountTest {
         dummyClient = new Client(dummyUuid, "name");
     }
 
+    @Category(PositiveTests.class)
     @Test
     public void shouldCreateAccountWhenNotNullIdAndClient() {
         SavingAccount sut = new SavingAccount(dummyUuid, dummyClient, 0);
@@ -36,6 +39,7 @@ public class SavingAccountTest {
                 ));
     }
 
+    @Category(PositiveTests.class)
     @Test
     public void shouldSaveAmountWhenCreated() {
         dummyUuid = UUID.randomUUID();
@@ -49,6 +53,7 @@ public class SavingAccountTest {
                 ));
     }
 
+    @Category(NegativeTests.class)
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotCreateAccountWhenNullId() {
         dummyUuid = UUID.randomUUID();
@@ -57,6 +62,7 @@ public class SavingAccountTest {
         new SavingAccount(null, dummyClient, 0);
     }
 
+    @Category(NegativeTests.class)
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotCreateAccountWhenNullClient() {
         dummyUuid = UUID.randomUUID();
